@@ -1,13 +1,14 @@
-{ pkgs, inputs, illogical-flake, ... }: 
+{ pkgs, inputs, illogical-flake, ... }:
 
 {
   imports = [
     illogical-flake.homeManagerModules.default
-    ./modules/yazi.nix
-    ./modules/cursor.nix
-    ./modules/dev-tools.nix
-    ./modules/apps.nix
-    ./modules/hypr-custom.nix
+    ../../modules/home/yazi.nix
+    ../../modules/home/cursor.nix
+    ../../modules/home/dev-tools.nix
+    ../../modules/home/apps.nix
+    ../../modules/home/hypr-custom.nix
+    ../../modules/home/git.nix
   ];
 
   programs.illogical-impulse.enable = true;

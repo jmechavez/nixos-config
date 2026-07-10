@@ -25,18 +25,16 @@
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
-        ./configuration.nix
+        ./hosts/nixos/configuration.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "hm-backup";
 
-          # Pass flakes down so home.nix can access them
           home-manager.extraSpecialArgs = { inherit inputs illogical-flake; };
 
-          # Import our separate home.nix config file here
-          home-manager.users.jmech_nix = import ./home.nix;
+          home-manager.users.jmech_nix = import ./home/jmech_nix/home.nix;
         }
       ];
     };

@@ -3,8 +3,11 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./packages.nix   # Imports your dev toolchain file
-    ./services.nix   # Imports your background engines file
+    ./packages.nix
+    ./services.nix
+    ../../modules/system/desktop.nix
+    ../../modules/system/audio.nix
+    ../../modules/system/users.nix
   ];
 
   # Bootloader configuration
@@ -14,6 +17,7 @@
   # Networking
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
+  networking.firewall.enable = true;
 
   # Regional and locale settings
   time.timeZone = "Asia/Manila";
@@ -31,33 +35,8 @@
     LC_TIME           = "fil_PH";
   };
 
-  # Graphical desktop session
-  services.xserver.enable = true;
-  services.desktopManager.plasma6.enable = false;
-
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true; # Recommended for better session management
-  };
-
-  # Display manager (auto-login)
-  services.displayManager.sddm = {
-    enable = true;
-
-    autoLogin = {
-      enable = true;
-      user = "jmech_nix";
-    };
-  };
-
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
   # Security and sudo configuration
   security.sudo.wheelNeedsPassword = true;
-
   security.sudo.extraConfig = ''
     Defaults timestamp_timeout=30
   '';
@@ -65,33 +44,13 @@
   # Hardware services
   services.printing.enable = true;
 
-  services.pulseaudio.enable = false;
-
-  security.rtkit.enable = true;
-
-  services.pipewire = {
+  # Remote access
+  services.openssh = {
     enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  # Primary user profile
-  users.users."jmech_nix" = {
-    isNormalUser = true;
-    description = "jmech_nix";
-
-    # Sudo, networking, Docker, printing
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "docker"
-      "lp"
-    ];
-
-    packages = with pkgs; [
-      kdePackages.kate
-    ];
+    settings = {
+      PasswordAuthentication = false; # key-based login only, more secure
+      PermitRootLogin = "no";
+    };
   };
 
   # Applications
@@ -111,6 +70,7 @@
     "nix-command"
     "flakes"
   ];
+  nix.settings.trusted-users = [ "root" "jmech_nix" ];
 
   # System release version tracking
   system.stateVersion = "26.05";
