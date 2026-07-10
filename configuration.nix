@@ -7,29 +7,31 @@
     ./services.nix   # Imports your background engines file
   ];
 
-  # Bootloader configurations
+  # Bootloader configuration
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Networking
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
-  # Regional and Locale Settings
+  # Regional and locale settings
   time.timeZone = "Asia/Manila";
+
   i18n.defaultLocale = "en_PH.UTF-8";
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "fil_PH";
+    LC_ADDRESS        = "fil_PH";
     LC_IDENTIFICATION = "fil_PH";
-    LC_MEASUREMENT = "fil_PH";
-    LC_MONETARY = "fil_PH";
-    LC_NAME = "fil_PH";
-    LC_NUMERIC = "fil_PH";
-    LC_PAPER = "fil_PH";
-    LC_TELEPHONE = "fil_PH";
-    LC_TIME = "fil_PH";
+    LC_MEASUREMENT    = "fil_PH";
+    LC_MONETARY       = "fil_PH";
+    LC_NAME           = "fil_PH";
+    LC_NUMERIC        = "fil_PH";
+    LC_PAPER          = "fil_PH";
+    LC_TELEPHONE      = "fil_PH";
+    LC_TIME           = "fil_PH";
   };
 
-  # Graphical Desktop Session (KDE Plasma 6 with Auto-Login)
+  # Graphical desktop session
   services.xserver.enable = true;
   services.desktopManager.plasma6.enable = false;
 
@@ -37,28 +39,36 @@
     enable = true;
     withUWSM = true; # Recommended for better session management
   };
-  
-  # Configure Auto-Login to bypass the login screen
+
+  # Display manager (auto-login)
   services.displayManager.sddm = {
     enable = true;
+
     autoLogin = {
       enable = true;
       user = "jmech_nix";
     };
   };
-  
-  services.xserver.xkb = { layout = "us"; variant = ""; };
 
-  # Security and Sudo configuration (extends password timeout for smoother editing)
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+
+  # Security and sudo configuration
   security.sudo.wheelNeedsPassword = true;
+
   security.sudo.extraConfig = ''
     Defaults timestamp_timeout=30
   '';
 
-  # Hardware Enablement Services
+  # Hardware services
   services.printing.enable = true;
+
   services.pulseaudio.enable = false;
+
   security.rtkit.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -66,21 +76,42 @@
     pulse.enable = true;
   };
 
-  # Primary User Profile Configuration
+  # Primary user profile
   users.users."jmech_nix" = {
     isNormalUser = true;
     description = "jmech_nix";
-    # Assigned to wheel (sudo), networkmanager, and docker groups
-    extraGroups = [ "networkmanager" "wheel" "docker" "lp"];
-    packages = with pkgs; [ kdePackages.kate ];
+
+    # Sudo, networking, Docker, printing
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "lp"
+    ];
+
+    packages = with pkgs; [
+      kdePackages.kate
+    ];
   };
 
+  # Applications
   programs.firefox.enable = true;
+
+  # GPG and Pinentry
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryPackage = pkgs.pinentry-curses;
+  };
+
+  # Nix configuration
   nixpkgs.config.allowUnfree = true;
 
-  # Permanently register Experimental Flake Utilities
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
-  # System Release Version Tracking
+  # System release version tracking
   system.stateVersion = "26.05";
 }

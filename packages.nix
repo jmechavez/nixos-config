@@ -9,11 +9,15 @@
     obsidian
     lazygit
 
+    # Password Manager
+    pass
+    gnupg
+    pinentry-curses
+
     # New Power Tools
     fzf            # Fuzzy finder for files and history
     zoxide         # Smarter 'cd' command
     ripgrep        # Extremely fast recursive search (grep alternative)
-    pass           # The standard unix password manager
     yazi
     btop
     bat
