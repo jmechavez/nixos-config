@@ -12,7 +12,7 @@
     # Password Manager
     pass
     gnupg
-    pinentry-curses
+    # pinentry-curses
 
     # New Power Tools
     fzf            # Fuzzy finder for files and history

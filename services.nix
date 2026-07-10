@@ -22,10 +22,8 @@
   # ============================================================
   # HYPRLAND & DESKTOP SERVICES
   # ============================================================
-  programs.hyprland.enable = true;
 
   services.geoclue2.enable = true;      # Handles location API scopes for Qt widgets
-  networking.networkmanager.enable = true;  # Robust background network manager tracking
 
   # Enable Bluetooth hardware support
   hardware.bluetooth = {
