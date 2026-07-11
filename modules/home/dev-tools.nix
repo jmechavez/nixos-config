@@ -19,6 +19,11 @@
 
   programs.fish = {
     enable = true;
+
+    functions = {
+      fish_greeting = "pokeget random";
+    };
+
     shellAliases = {
       lg = "lazygit";
       v = "sudoedit";
@@ -27,9 +32,19 @@
       nr = "sudo nixos-rebuild switch --flake /etc/nixos/#nixos";
       nup = "nix flake update /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos/#nixos";
       clean = "sudo nix-collect-garbage -d";
+      
+      ports = "sudo ss -tulpn";
+      ip = "ip -c a";
+      df = "duf";
+      du = "dust";
+      ps = "procs";
     };
+
     shellAbbrs = {
-      cls = "clear";
+      cl = "clear";
+      dc = "docker compose";
+      dcu = "docker compose up -d";
+      dcd = "docker compose down";
     };
   };
 }

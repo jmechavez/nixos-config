@@ -9,6 +9,7 @@
     ../../modules/home/apps.nix
     ../../modules/home/hypr-custom.nix
     ../../modules/home/git.nix
+    ../../modules/home/pokescript.nix
   ];
 
   programs.illogical-impulse.enable = true;

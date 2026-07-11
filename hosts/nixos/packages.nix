@@ -47,6 +47,22 @@
     # Virtualisation Layer
     docker
     docker-compose
+
+    # Fun / terminal flair
+    pokemonsay
+    cbonsai
+    cmatrix
+    lolcat
+    pokeget-rs
+
+    # Useful + pretty
+    fastfetch
+    onefetch
+    tldr
+    duf
+    dust
+    procs
+    gping
   ];
 
   # Global System Typography Declarations
