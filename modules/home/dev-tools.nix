@@ -20,6 +20,10 @@
   programs.fish = {
     enable = true;
 
+    interactiveShellInit = ''
+    direnv hook fish | source
+  '';
+
     functions = {
       fish_greeting = "pokeget random";
     };
@@ -48,3 +52,4 @@
     };
   };
 }
+
