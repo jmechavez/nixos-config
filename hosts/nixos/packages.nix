@@ -8,6 +8,7 @@
     neovim
     obsidian
     lazygit
+    libreoffice-fresh
 
     # Password Manager
     pass
@@ -33,6 +34,8 @@
     corepack # Dynamically bridges global npm, yarn, and pnpm packages
     rustup
     python3
+    devenv
+    direnv
 
     # Essential LSP/Formatters
     gopls
