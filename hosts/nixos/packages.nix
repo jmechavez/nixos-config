@@ -9,6 +9,7 @@
     obsidian
     lazygit
     libreoffice-fresh
+    nvd
 
     # Password Manager
     pass
@@ -39,6 +40,7 @@
 
     # Essential LSP/Formatters
     gopls
+    golangci-lint
     rust-analyzer
     pyright
     typescript-language-server
@@ -66,6 +68,8 @@
     dust
     procs
     gping
+
+    qbittorrent
   ];
 
   # Global System Typography Declarations

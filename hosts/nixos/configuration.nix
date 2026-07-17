@@ -53,6 +53,8 @@
     };
   };
 
+  programs.nix-ld.enable = true;
+
   # Applications
   programs.firefox.enable = true;
 

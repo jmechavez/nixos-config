@@ -5,6 +5,8 @@
     neovim
     gnumake
     gcc
+    glibc
+    pkg-config
     ripgrep
     fd
     fzf
