@@ -9,6 +9,7 @@
     ".config/hypr/custom/variables.lua".text = ''
       browser = "zen"
       fileManager = "foot -e yazi"
+      terminal = "foot"
     '';
   };
 }

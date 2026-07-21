@@ -18,6 +18,8 @@
       url = "github:soymou/illogical-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    kiru.url = "github:kiruhq/kiru-nix";
   };
 
   outputs = { self, nixpkgs, home-manager, illogical-flake, ... }@inputs: {

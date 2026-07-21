@@ -8,6 +8,7 @@
     ../../modules/system/desktop.nix
     ../../modules/system/audio.nix
     ../../modules/system/users.nix
+    ../../modules/system/steam.nix
   ];
 
   # Bootloader configuration

@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
-    # Core Utilities
+    # --- Core Utilities ---
     git
     wget
     neovim
@@ -11,56 +11,59 @@
     libreoffice-fresh
     nvd
 
-    # Password Manager
+    # --- Password Management ---
     pass
     gnupg
-    # pinentry-curses
 
-    # New Power Tools
-    fzf            # Fuzzy finder for files and history
-    zoxide         # Smarter 'cd' command
-    ripgrep        # Extremely fast recursive search (grep alternative)
-    yazi
-    btop
-    bat
+    # --- Power Tools ---
+    fzf            # Fuzzy finder
+    zoxide         # Smarter 'cd'
+    ripgrep        # Fast recursive search
+    yazi           # Terminal file manager
+    btop           # Resource monitor
+    bat            # Cat clone with syntax highlighting
 
-    # Browsers
+    # --- Browsers ---
     brave
-    
-    # Development Toolchains
+
+    # --- Development Toolchains ---
     go
     rustc
     cargo
     nodejs
-    corepack # Dynamically bridges global npm, yarn, and pnpm packages
+    corepack       # Manages package managers (npm, yarn, pnpm)
     rustup
     python3
     devenv
     direnv
 
-    # Essential LSP/Formatters
+    # --- Go Development Tools (for gopher.nvim) ---
     gopls
     golangci-lint
+    gomodifytags   # Required by gopher.nvim
+    gotests        # Required by gopher.nvim
+    impl           # Required by gopher.nvim
+    iferr          # Required by gopher.nvim
+    gotools        # Additional Go utilities
+
+    # --- Other Language LSP/Formatters ---
     rust-analyzer
     pyright
     typescript-language-server
     prettierd
-    
-    # Message App
+
+    # --- Productivity & Communication ---
     zoom-us
+    qbittorrent
 
-    # Virtualisation Layer
-    docker
-    docker-compose
-
-    # Fun / terminal flair
+    # --- Terminal Flair ---
     pokemonsay
     cbonsai
     cmatrix
     lolcat
     pokeget-rs
 
-    # Useful + pretty
+    # --- System Info & Diagnostics ---
     fastfetch
     onefetch
     tldr
@@ -69,14 +72,13 @@
     procs
     gping
 
-    qbittorrent
+    inputs.kiru.packages.x86_64-linux.kiru
   ];
 
-  # Global System Typography Declarations
+  # --- System Typography ---
   fonts.packages = with pkgs; [
     rubik
     nerd-fonts.ubuntu
     nerd-fonts.jetbrains-mono
   ];
-
 }
