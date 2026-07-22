@@ -1,28 +1,45 @@
-# Yazi (terminal file manager) config: openers and color theme.
+# Yazi (terminal file manager) config: openers, color theme, and default
+# file-manager association (so "Show in Folder" in apps like Zen launches
+# yazi instead of a GTK file manager).
 { pkgs, ... }:
 {
   programs.yazi = {
     enable = true;
     settings = {
       opener = {
-        # Files opened with Enter/"edit" go to neovim in a blocking terminal tab
         edit = [
           { run = ''nvim "$@"''; block = true; desc = "Neovim"; }
         ];
-        # Files opened with "open" (e.g. images, PDFs) go to the desktop default
         open = [
           { run = ''xdg-open "$@"''; desc = "Open"; }
         ];
       };
     };
     theme = {
-      # yazi renamed the theme.toml "manager" section to "mgr" in a recent
-      # release — using `manager` here writes a section current yazi ignores.
       mgr = {
         cwd = { fg = "#ffffff"; };
         hovered = { bg = "#444444"; fg = "#ffffff"; };
         find_keyword = { fg = "#cccccc"; };
       };
+    };
+  };
+
+  # Registers yazi (running inside foot) as the system's default handler
+  # for opening directories, so things like a browser's "Show in Folder"
+  # or a file dialog's "Open Containing Folder" launch it.
+  xdg.desktopEntries.yazi-foot = {
+    name = "Yazi (foot)";
+    genericName = "File Manager";
+    exec = "foot -e yazi %U";
+    terminal = false;
+    categories = [ "System" "FileTools" ];
+    mimeType = [ "inode/directory" ];
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = "yazi-foot.desktop";
     };
   };
 }
