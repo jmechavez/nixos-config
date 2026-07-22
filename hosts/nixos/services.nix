@@ -1,8 +1,14 @@
+# System-level services. These are NixOS options (not home-manager options) —
+# this is the correct place for docker/postgres/bluetooth/etc.
+# NOTE: this content was previously duplicated into modules/home/apps.nix,
+# which is imported as a *home-manager* module. That duplicate has been
+# removed there — see the comment at the top of apps.nix.
 { pkgs, ... }:
 
 {
   # Docker Containerization Host Engine
   virtualisation.docker.enable = true;
+  virtualisation.docker.autoPrune.enable = true;
 
   # PostgreSQL Local Database Host
   services.postgresql = {
@@ -19,10 +25,6 @@
   };
   nix.settings.auto-optimise-store = true;
 
-  # ============================================================
-  # HYPRLAND & DESKTOP SERVICES
-  # ============================================================
-
   services.geoclue2.enable = true;      # Handles location API scopes for Qt widgets
 
   # Enable Bluetooth hardware support
@@ -33,6 +35,5 @@
 
   # Enable the Bluetooth manager service (essential for tray icons/bars)
   services.blueman.enable = true;
-
 }
 

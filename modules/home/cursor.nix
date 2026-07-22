@@ -1,3 +1,4 @@
+# Cursor theme configuration for both GTK apps and X11/XWayland apps.
 { pkgs, ... }:
 
 {
@@ -14,6 +15,7 @@
   };
 
   # 3. Explicitly set environment variables for Hyprland
+  # (native-Wayland apps don't always pick up home.pointerCursor automatically)
   wayland.windowManager.hyprland.settings = {
     env = [
       "XCURSOR_THEME,Bibata-Modern-Classic"
@@ -21,3 +23,4 @@
     ];
   };
 }
+

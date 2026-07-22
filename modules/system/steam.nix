@@ -1,3 +1,5 @@
+# Steam gaming platform, with firewall ports opened for Remote Play and
+# hosting dedicated game servers.
 { pkgs, ... }:
 
 {
@@ -7,3 +9,4 @@
     dedicatedServer.openFirewall = true;
   };
 }
+

@@ -1,3 +1,6 @@
+# System-wide package set, available to every user on this machine.
+# User-specific/GUI apps that only jmech_nix needs belong in
+# modules/home/apps.nix instead (home-manager scope), not here.
 { pkgs, inputs, ... }:
 
 {
@@ -5,23 +8,28 @@
     # --- Core Utilities ---
     git
     wget
-    neovim
     obsidian
     lazygit
     libreoffice-fresh
-    nvd
+    nvd            # Nix version diff tool, useful after `nixos-rebuild`
 
     # --- Password Management ---
     pass
     gnupg
 
     # --- Power Tools ---
-    fzf            # Fuzzy finder
-    zoxide         # Smarter 'cd'
-    ripgrep        # Fast recursive search
-    yazi           # Terminal file manager
+    # NOTE: neovim, ripgrep, fzf, zoxide, and yazi are intentionally NOT
+    # listed here. They're already provided (with actual configuration)
+    # by home-manager: zoxide via programs.zoxide (home.nix), yazi via
+    # programs.yazi (modules/home/yazi.nix), and neovim/ripgrep/fzf via
+    # home.packages (modules/home/dev-tools.nix). Declaring them again here
+    # just adds a redundant, unconfigured copy of the same binary.
     btop           # Resource monitor
     bat            # Cat clone with syntax highlighting
+
+    # --- Archive Tools ---
+    unzip          # extract .zip files
+    p7zip          # extract .7z and other archive formats
 
     # --- Browsers ---
     brave
@@ -72,6 +80,7 @@
     procs
     gping
 
+    # Custom package from the `kiru` flake input (see flake.nix)
     inputs.kiru.packages.x86_64-linux.kiru
   ];
 
@@ -82,3 +91,4 @@
     nerd-fonts.jetbrains-mono
   ];
 }
+

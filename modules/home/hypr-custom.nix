@@ -1,11 +1,16 @@
+# Custom Hyprland/illogical-impulse config files, dropped in as plain text.
 { ... }:
 
 {
   home.file = {
+    # Slight transparency on all windows (active/inactive opacity)
     ".config/hypr/custom/rules.lua".text = ''
-      hl.window_rule({ match = { class = ".*" }, opacity = "0.98 0.93" })
+      hl.window_rule({ match = { class = ".*" }, opacity = "0.95 0.92" })
     '';
 
+    # Default app bindings used elsewhere in the Hyprland config.
+    # NOTE: "browser = zen" requires the zen-browser package to actually be
+    # installed — see modules/home/apps.nix, which now installs it.
     ".config/hypr/custom/variables.lua".text = ''
       browser = "zen"
       fileManager = "foot -e yazi"
@@ -13,3 +18,4 @@
     '';
   };
 }
+

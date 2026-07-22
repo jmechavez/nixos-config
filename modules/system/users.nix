@@ -1,20 +1,21 @@
-{ pkgs, ... }:
+# System user account definition.
+{ ... }:
 
 {
   users.users."jmech_nix" = {
     isNormalUser = true;
     description = "jmech_nix";
 
-    # Sudo, networking, Docker, printing
     extraGroups = [
-      "networkmanager"
-      "wheel"
-      "docker"
-      "lp"
+      "networkmanager" # manage network connections without sudo
+      "wheel"          # sudo access
+      "docker"         # run docker without sudo
+      "lp"             # printing access
     ];
 
-    packages = with pkgs; [
-      kdePackages.kate
-    ];
+    # NOTE: no `packages` list here anymore — user-facing GUI apps (like
+    # kate, previously listed here) belong in home-manager scope instead;
+    # see modules/home/apps.nix. This file should stay account/groups only.
   };
 }
+

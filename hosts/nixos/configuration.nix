@@ -1,3 +1,4 @@
+# Main NixOS system configuration entry point for host "nixos".
 { config, pkgs, ... }:
 
 {
@@ -45,21 +46,23 @@
   # Hardware services
   services.printing.enable = true;
 
-  # Remote access
+  # Remote access — key-based SSH only, root login disabled
   services.openssh = {
     enable = true;
     settings = {
-      PasswordAuthentication = false; # key-based login only, more secure
+      PasswordAuthentication = false;
       PermitRootLogin = "no";
     };
   };
 
+  # Lets dynamically-linked non-NixOS binaries (e.g. some AppImages/VS Code
+  # extensions) find the libraries they expect via a compatibility shim.
   programs.nix-ld.enable = true;
 
   # Applications
   programs.firefox.enable = true;
 
-  # GPG and Pinentry
+  # GPG and Pinentry (SSH support routed through gpg-agent)
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -75,6 +78,7 @@
   ];
   nix.settings.trusted-users = [ "root" "jmech_nix" ];
 
-  # System release version tracking
+  # System release version tracking — this pins the NixOS state version,
+  # separate from home.stateVersion in home.nix. Leave both as-is once set.
   system.stateVersion = "26.05";
 }
