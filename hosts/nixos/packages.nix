@@ -13,6 +13,7 @@
     libreoffice-fresh
     nvd            # Nix version diff tool, useful after `nixos-rebuild`
     masterpdfeditor4
+    ascii-image-converter
 
     # --- Password Management ---
     pass
