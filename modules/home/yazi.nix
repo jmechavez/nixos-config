@@ -1,6 +1,6 @@
-# Yazi (terminal file manager) config: openers, color theme, and default
-# file-manager association (so "Show in Folder" in apps like Zen launches
-# yazi instead of a GTK file manager).
+# Yazi (terminal file manager) config: openers, color theme (flavor +
+# manual overrides), and default file-manager association (so "Show in
+# Folder" in apps like Zen launches yazi instead of a GTK file manager).
 { pkgs, ... }:
 {
   programs.yazi = {
@@ -15,7 +15,22 @@
         ];
       };
     };
+
+    # Local copy of the flavor, checked into this repo under
+    # ./yazi-flavors/flexoki-dark.yazi (copied from
+    # ~/.config/yazi/flavors/flexoki-dark.yazi) so the config is fully
+    # reproducible without depending on network access at build time.
+    flavors = {
+      flexoki-dark = ./yazi-flavors/flexoki-dark.yazi;
+    };
+
     theme = {
+      flavor = {
+        dark = "flexoki-dark";
+        light = "flexoki-dark";
+      };
+
+      # Manual overrides on top of the flavor above.
       mgr = {
         cwd = { fg = "#ffffff"; };
         hovered = { bg = "#444444"; fg = "#ffffff"; };
@@ -40,6 +55,7 @@
     enable = true;
     defaultApplications = {
       "inode/directory" = "yazi-foot.desktop";
+      "application/pdf" = "masterpdfeditor4.desktop";
     };
   };
 }

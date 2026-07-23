@@ -12,6 +12,7 @@
     lazygit
     libreoffice-fresh
     nvd            # Nix version diff tool, useful after `nixos-rebuild`
+    masterpdfeditor4
 
     # --- Password Management ---
     pass
