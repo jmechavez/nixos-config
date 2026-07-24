@@ -18,22 +18,23 @@ flake.nix
 hosts/nixos/
   configuration.nix       # host entry point: boot, networking, locale, security, ssh
   hardware-configuration.nix
-  packages.nix             # system-wide packages
-  services.nix              # docker, postgresql, bluetooth, geoclue2, nix gc
+  packages.nix            # system-wide packages
+  services.nix            # docker, postgresql, bluetooth, geoclue2, nix gc
 home/jmech_nix/
-  home.nix                  # home-manager entry point
+  home.nix                # home-manager entry point
 modules/system/
-  desktop.nix                # Hyprland + SDDM
-  audio.nix                   # PipeWire
-  users.nix                    # user account definition
-  steam.nix                     # Steam + remote play
+  desktop.nix             # Hyprland + SDDM
+  audio.nix               # PipeWire
+  users.nix               # user account definition
+  steam.nix               # Steam + remote play
 modules/home/
-  apps.nix                       # user-level GUI apps (zen-browser, kate)
-  dev-tools.nix                    # CLI tools + fish config
-  cursor.nix                        # Bibata cursor theme
-  yazi.nix                           # yazi: openers, flavor, default file-manager association
-  hypr-custom.nix                     # Hyprland variables/rules (browser, terminal, opacity)
-  git.nix                               # git identity
+  apps.nix                # user-level GUI apps (zen-browser, kate)
+  dev-tools.nix           # CLI tools + fish config
+  cursor.nix              # Bibata cursor theme
+  yazi.nix                # yazi: openers, flavor, default file-manager association
+  hypr-custom.nix         # Hyprland variables/rules (browser, terminal, opacity)
+  git.nix                 # git identity
+  btop.nix                # btop
 ```
 
 ## Key Features
